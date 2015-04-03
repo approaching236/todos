@@ -6,7 +6,8 @@
   (layout/render "todos/index.html"))
 
 (defn show [id]
-  (layout/render "todos/show.html"))
+  (layout/render "todos/show.html"
+                 {:id id}))
 
 (defn todos-routes []
   (routes
