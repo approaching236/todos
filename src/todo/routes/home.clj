@@ -1,6 +1,10 @@
 (ns todo.routes.home
   (:require [todo.layout :as layout]
-            [compojure.core :refer [defroutes GET]]
+            [todo.routes.todos :refer [todos-routes]]
+            [compojure.core :refer [defroutes
+                                    GET
+                                    context
+                                    routes]]
             [clojure.java.io :as io]))
 
 (defn home-page []
@@ -10,10 +14,8 @@
 (defn about-page []
   (layout/render "about.html"))
 
-(defn todos []
-  (layout/render "todos.html"))
-
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
-  (GET "/todos" [] (todos)))
+  (context "/todos" []
+           (routes (todos-routes))))
